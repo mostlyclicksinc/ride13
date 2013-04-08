@@ -3,12 +3,15 @@ class RidersController < ApplicationController
   # GET /riders.json
   def index
     @riders = Rider.all
+    @race_start_time = Time.new(2013,5,3,17,30,0,"+06:00")
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @riders }
     end
   end
+
+
 
   # GET /riders/1
   # GET /riders/1.json
@@ -80,4 +83,14 @@ class RidersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+
+    def start_time
+      #Time.new(2013,5,3,17,30,0,"+06:00") #Set time to May 3rd, 5:30
+      
+
+      @st = Time.now + (Rider.id * 30).seconds
+      
+    end
 end
