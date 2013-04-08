@@ -1,4 +1,7 @@
 Ride13::Application.routes.draw do
+  resources :riders
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
