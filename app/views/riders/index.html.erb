@@ -11,6 +11,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @riders.each do |rider| %>
@@ -21,7 +22,7 @@
     
     <td><%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
     <td><%= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :short) unless rider.finish_time.nil? %></td>
-    <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id %></td>
+    <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id, :class => "finish_btn" %></td>
 
     <td><%= link_to 'Show', rider %></td>
     <td><%= link_to 'Edit', edit_rider_path(rider) %></td>
@@ -33,3 +34,13 @@
 <br />
 
 <%= link_to 'New Rider', new_rider_path %>
+
+<script>
+
+$(document).ready(function() {
+    $('.button_to input').click(function(){
+      alert("hello I'm clicked");
+    });
+});
+
+</script>
