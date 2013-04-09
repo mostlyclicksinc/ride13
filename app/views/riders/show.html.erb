@@ -6,6 +6,13 @@
 </p>
 
 <p>
+	<b>Rider Start time:</b>
+	<%#= rider_start_time(1) %>
+	<%= rider_start_time(@rider.id) %>
+	<%#= @race_start_time %>
+</p>
+
+<p>
   <b>Email:</b>
   <%= @rider.email %>
 </p>

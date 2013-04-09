@@ -1,14 +1,39 @@
 class RidersController < ApplicationController
   # GET /riders
   # GET /riders.json
+
+  before_filter :race_start_time
+
   def index
     @riders = Rider.all
-    @race_start_time = Time.new(2013,5,3,17,30,0,"+06:00")
+    #@race_start_time = Time.new(2013,5,3,17,30,0,"+06:00") #Set for race day
+    
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @riders }
     end
+  end
+
+  def race_start_time
+    @race_start_time = Time.new(2013,4,9,9,00,0)
+  end
+
+  def rider_finish
+    @rider = Rider.find(params[:id])
+    @rider.finish_time = Time.now
+    puts Time.now
+
+    respond_to do |format|
+      if @rider.update_attributes(params[:rider])
+        format.html { redirect_to riders_url }
+        format.json { render json: @riders }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @rider.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
 
@@ -86,11 +111,5 @@ class RidersController < ApplicationController
 
 private
 
-    def start_time
-      #Time.new(2013,5,3,17,30,0,"+06:00") #Set time to May 3rd, 5:30
-      
-
-      @st = Time.now + (Rider.id * 30).seconds
-      
-    end
+    
 end

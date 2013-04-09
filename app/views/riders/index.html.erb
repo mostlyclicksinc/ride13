@@ -5,6 +5,9 @@
     <th>Name</th>
     <th>Email</th>
     <th>Start Time</th>
+    <th>Finish Time</th>
+    <th>Ride Time</th>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,8 +17,12 @@
   <tr>
     <td><%= rider.name %></td>
     <td><%= rider.email %></td>
-    <% st = (@race_start_time + ((rider.id - 1) * 30).seconds) %>
-    <td><%= st.strftime("%l:%M:%S") %></td>
+    <td><%= rider_start_time(rider.id) %></td>
+    
+    <td><%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
+    <td><%= ((rider.finish_time - @st) / 60).to_i %> : <%= @st %></td>
+    <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id %></td>
+
     <td><%= link_to 'Show', rider %></td>
     <td><%= link_to 'Edit', edit_rider_path(rider) %></td>
     <td><%= link_to 'Destroy', rider, method: :delete, data: { confirm: 'Are you sure?' } %></td>

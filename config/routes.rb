@@ -1,6 +1,9 @@
 Ride13::Application.routes.draw do
   resources :riders
 
+  match 'riders/rider_finish' => 'riders#rider_finish'
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

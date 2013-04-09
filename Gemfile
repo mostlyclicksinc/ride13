@@ -7,6 +7,7 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 gem 'unicorn'
+gem 'chronic_duration'
 
 
 # Gems used only for assets and not required
@@ -19,6 +20,11 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
 gem 'jquery-rails'
