@@ -20,7 +20,7 @@
     <td><%= rider_start_time(rider.id) %></td>
     
     <td><%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
-    <td><%= ((rider.finish_time - @st) / 60).to_i %> : <%= @st %></td>
+    <td><%= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :short) unless rider.finish_time.nil? %></td>
     <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id %></td>
 
     <td><%= link_to 'Show', rider %></td>
