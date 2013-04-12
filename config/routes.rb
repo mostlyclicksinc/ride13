@@ -2,6 +2,7 @@ Ride13::Application.routes.draw do
   resources :riders
 
   match 'riders/rider_finish' => 'riders#rider_finish'
+  match 'riders/leader_board' => 'riders#leader_board'
 
 
 

@@ -13,3 +13,21 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(function(){
+	//var pusher = new Pusher(pusher_key, pusher_channel)
+	var pusher = new Pusher(pusher_key);
+	var channel = pusher.subscribe(pusher_channel);
+	//var fin_time = @ride_time_output;
+
+	pusher.bind('rider_finish', function(rider){
+		console.log("Here here rider finish");
+		$("tr#" + rider.id).children("#td_finish").text(rider.finish_time);
+	});
+
+//pusher.bind('leader_board', function(rider){
+//	console.log("Leader board triggered");
+//	$("tr#" + rider.id).children("#td_finish").text(rider.finish_time);
+//});
+
+});

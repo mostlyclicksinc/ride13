@@ -8,7 +8,6 @@ class RidersController < ApplicationController
     @riders = Rider.all
     #@race_start_time = Time.new(2013,5,3,17,30,0,"+06:00") #Set for race day
     
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @riders }
@@ -16,13 +15,13 @@ class RidersController < ApplicationController
   end
 
   def race_start_time
-    @race_start_time = Time.new(2013,4,9,9,00,0)
+    @race_start_time = Time.new(2013,5,12,11,30,0)
   end
 
   def rider_finish
     @rider = Rider.find(params[:id])
     @rider.finish_time = Time.now
-    puts Time.now
+    #leader_board
 
     respond_to do |format|
       if @rider.update_attributes(params[:rider])
@@ -33,7 +32,14 @@ class RidersController < ApplicationController
         format.json { render json: @rider.errors, status: :unprocessable_entity }
       end
     end
+  end
 
+  def leader_board
+    @riders = Rider.all
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @riders }
+    end
   end
 
 

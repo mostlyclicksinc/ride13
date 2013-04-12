@@ -1,5 +1,4 @@
-<h1>Listing riders</h1>
-<%#= hello %>
+<h1>Listing riders Stuff</h1>
 
 <table>
   <tr>
@@ -20,15 +19,10 @@
     <td><%= rider.name %></td>
     <td><%= rider.email %></td>
     <td><%= rider_start_time(rider.id) %></td>
-    <% @finish_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
     
-    <td id="td_finish">
-        <%= @finish_time_output %>
-        <%#= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
-
-    <%# @ride_time_output =  %>
-    <td id="td_ride_time"><%= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :chrono) unless rider.finish_time.nil? %></td>
-
+    <td id="td_finish"><%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
+    <% @ride_time_output = ChronicDuration.output((rider.finish_time - @st).to_i, :format => :short) unless rider.finish_time.nil? %>
+    <td id="td_ride_time"><%= @ride_time_output %></td>
     <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id, :class => "finish_btn" %></td>
 
     <td><%= link_to 'Show', rider %></td>
