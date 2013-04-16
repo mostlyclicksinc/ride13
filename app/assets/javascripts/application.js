@@ -22,7 +22,7 @@ $(function(){
 
 	pusher.bind('rider_finish', function(rider){
 		console.log("Here here rider finish");
-		$("tr#" + rider.id).children("#td_finish").text(rider.finish_time);
+		//$("tr#" + rider.id).children("#td_finish").text(rider.finish_time);
 		$("tr#" + rider.id).children("#td_ride_time").text(rider.finish_time);
 	});
 

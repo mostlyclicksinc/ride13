@@ -4,7 +4,7 @@ class Rider < ActiveRecord::Base
 
   before_create :set_start_time
 
-  #after_update :push_finish
+  after_update :push_finish
 
 
 
@@ -16,22 +16,19 @@ class Rider < ActiveRecord::Base
   		push_event('rider_finish') #push event rider_finish action
   		push_event('leader_board') #push event
   	end
-#
-    def race_start_time
-      start_time = Time.new(2013,4,15,12,00,0)
-      start_time + ((self.id - 1) * 30).seconds
-    end
+
+    
 
   	def push_event(event_type)
-      ttime = ChronicDuration.output((self.finish_time - race_start_time).to_i)
-  		ftime = ChronicDuration.output((self.finish_time - race_start_time).to_i, :format => :short)
+      ftime = ChronicDuration.output((self.finish_time).to_i)
+  		rtime = ChronicDuration.output((calculate_finish_time), :format => :short)
       #ftime = ChronicDuration.output((self.finish_time).to_i, :format => :chrono)
   		Pusher["ride13-#{Rails.env}"].trigger(event_type,
   		{
   			:id => self.id.to_s,
   			:name => self.name,
   			:rider_number => self.rider_number,
-  			:finish_time => ftime#finish_time.strftime("%l:%M:%S")
+  			:finish_time => rtime
   		})
   	end
 
@@ -40,6 +37,12 @@ class Rider < ActiveRecord::Base
     def set_start_time
       st = Time.new(2013,4,16,10,45,0)
       self.start_time = st + (Rider.count * 30).seconds
-    end  
+    end
+
+    def calculate_finish_time
+      (self.finish_time - self.start_time).to_i
+    end
+
+
 
 end
