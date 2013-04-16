@@ -2,10 +2,11 @@ class RidersController < ApplicationController
   # GET /riders
   # GET /riders.json
 
-  before_filter :race_start_time
+  #before_filter :race_start_time
 
   def index
     @riders = Rider.all
+    @rider_counter
     #@race_start_time = Time.new(2013,5,3,17,30,0,"+06:00") #Set for race day
     
     respond_to do |format|
@@ -15,7 +16,7 @@ class RidersController < ApplicationController
   end
 
   def race_start_time
-    @race_start_time = Time.new(2013,5,12,11,30,0)
+    @race_start_time = Time.new(2013,4,16,9,00,0)
   end
 
   def rider_finish
@@ -75,6 +76,7 @@ class RidersController < ApplicationController
   # POST /riders.json
   def create
     @rider = Rider.new(params[:rider])
+    
 
     respond_to do |format|
       if @rider.save

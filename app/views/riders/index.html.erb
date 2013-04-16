@@ -14,20 +14,29 @@
     <th></th>
     <th></th>
   </tr>
-
+<%= hello %>
 <% @riders.each do |rider| %>
   <tr id="<%= rider.id %>">
     <td><%= rider.name %></td>
     <td><%= rider.email %></td>
-    <td><%= rider_start_time(rider.id) %></td>
+    <td><%= rider.start_time.strftime("%l:%M:%S") %></td>
     <% @finish_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
     
-    <td id="td_finish">
-        <%= @finish_time_output %>
-        <%#= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
+    <td id="td_finish">    
+        <%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
+    </td>
 
-    <%# @ride_time_output =  %>
-    <td id="td_ride_time"><%= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :chrono) unless rider.finish_time.nil? %></td>
+    
+    <td id="td_ride_time">
+        <%= ChronicDuration.output(((rider.finish_time - rider.start_time unless rider.finish_time.nil?).to_i), :format => :short) %>
+        <%# e = rider.finish_time - @st %>
+        <em><%#= ChronicDuration.output((e).to_i, :format => :short) %></em>
+        <strong><%#= e.strftime("%l:%M:%S") %></strong>
+        <%#= (((rider.finish_time) - @st).to_i).strftime("%l:%M:%S") %>
+        <%# @rider_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
+        <%#= (rider.finish_time - @st) %>
+        <%#= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :chrono) unless rider.finish_time.nil? %>
+    </td>
 
     <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id, :class => "finish_btn" %></td>
 
