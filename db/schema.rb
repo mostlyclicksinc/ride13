@@ -11,16 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416140956) do
+ActiveRecord::Schema.define(:version => 20130502142516) do
 
   create_table "riders", :force => true do |t|
-    t.string   "name"
+    t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.datetime "finish_time"
     t.integer  "rider_number"
     t.datetime "start_time"
+    t.datetime "ride_time"
+    t.string   "chip_id"
+    t.time     "official_start_time"
+    t.string   "first_name"
+    t.string   "rider_gender"
+    t.string   "club_team"
+    t.string   "rider_cat"
+    t.string   "rider_class"
+    t.string   "race_entered"
+    t.string   "road_cat"
+    t.string   "license"
   end
 
 end

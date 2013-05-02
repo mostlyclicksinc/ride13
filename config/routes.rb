@@ -1,8 +1,11 @@
 Ride13::Application.routes.draw do
-  resources :riders
+  resources :riders do
+    collection { post :import }
+    
+  end
 
   match 'riders/rider_finish' => 'riders#rider_finish'
-  match 'riders/leader_board' => 'riders#leader_board'
+  match '/leader_board' => 'riders#leader_board'
 
 
 
@@ -55,7 +58,7 @@ Ride13::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'riders#index'
 
   # See how all your routes lay out with "rake routes"
 

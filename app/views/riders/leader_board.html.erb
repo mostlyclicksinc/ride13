@@ -1,47 +1,56 @@
-<h1>Listing riders Stuff</h1>
+<h1>Leaderboard</h1>
+
+
 
 <table>
   <tr>
+    <th>Bib Number</th>
     <th>Name</th>
-    <th>Email</th>
+
+    <th>Official ST</th>
     <th>Start Time</th>
     <th>Finish Time</th>
     <th>Ride Time</th>
+ 
     <th></th>
     <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 
 <% @riders.each do |rider| %>
   <tr id="<%= rider.id %>">
-    <td><%= rider.name %></td>
-    <td><%= rider.email %></td>
-    <td><%= rider_start_time(rider.id) %></td>
+    <td><%= rider.rider_number %></td>
+    <td><%= rider.first_name %> <%= rider.last_name %></td>
     
-    <td id="td_finish"><%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %></td>
-    <% @ride_time_output = ChronicDuration.output((rider.finish_time - @st).to_i, :format => :short) unless rider.finish_time.nil? %>
-    <td id="td_ride_time"><%= @ride_time_output %></td>
-    <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id, :class => "finish_btn" %></td>
+
+    <td><%= rider.official_start_time.strftime("%l:%M:%S") %></td>
+    <td><%= rider.start_time.strftime("%l:%M:%S") %></td>
+    <% @finish_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
+    
+    <td id="td_finish">
+        <%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
+        <%#= ChronicDuration.output(((rider.finish_time unless rider.finish_time.nil?).to_i), :format => :short) %>
+    </td>
+
+    
+    <td id="td_ride_time">
+        <%= ChronicDuration.output(((rider.finish_time - rider.start_time unless rider.finish_time.nil?).to_i), :format => :short) %>
+        <%# e = rider.finish_time - @st %>
+        <em><%#= ChronicDuration.output((e).to_i, :format => :short) %></em>
+        <strong><%#= e.strftime("%l:%M:%S") %></strong>
+        <%#= (((rider.finish_time) - @st).to_i).strftime("%l:%M:%S") %>
+        <%# @rider_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
+        <%#= (rider.finish_time - @st) %>
+        <%#= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :chrono) unless rider.finish_time.nil? %>
+    </td>
+
+
 
     <td><%= link_to 'Show', rider %></td>
-    <td><%= link_to 'Edit', edit_rider_path(rider) %></td>
-    <td><%= link_to 'Destroy', rider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+   
   </tr>
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'New Rider', new_rider_path %>
 
-<script>
-
-//$(document).ready(function() {
-//    $('.button_to input').click(function(){
-//      alert("hello I'm clicked");
-//    });
-//});
-
-</script>

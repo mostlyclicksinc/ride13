@@ -1,10 +1,17 @@
 <h1>Listing riders</h1>
-<%#= hello %>
+
+<h2>Import Riders</h2>
+<%= form_tag import_riders_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+<% end %>
 
 <table>
   <tr>
+    <th>Bib Number</th>
     <th>Name</th>
     <th>Email</th>
+    <th>Official ST</th>
     <th>Start Time</th>
     <th>Finish Time</th>
     <th>Ride Time</th>
@@ -17,13 +24,17 @@
 <%= hello %>
 <% @riders.each do |rider| %>
   <tr id="<%= rider.id %>">
-    <td><%= rider.name %></td>
+    <td><%= rider.rider_number %></td>
+    <td><%= rider.first_name %> <%= rider.last_name %></td>
+    
     <td><%= rider.email %></td>
+    <td><%= rider.official_start_time.strftime("%l:%M:%S") %></td>
     <td><%= rider.start_time.strftime("%l:%M:%S") %></td>
     <% @finish_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
     
-    <td id="td_finish">    
+    <td id="td_finish">
         <%= rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
+        <%#= ChronicDuration.output(((rider.finish_time unless rider.finish_time.nil?).to_i), :format => :short) %>
     </td>
 
     

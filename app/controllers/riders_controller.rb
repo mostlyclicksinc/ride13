@@ -5,7 +5,7 @@ class RidersController < ApplicationController
   #before_filter :race_start_time
 
   def index
-    @riders = Rider.all
+    @riders = Rider.all(:order => 'start_time ASC')
     @rider_counter
     #@race_start_time = Time.new(2013,5,3,17,30,0,"+06:00") #Set for race day
     
@@ -13,6 +13,11 @@ class RidersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @riders }
     end
+  end
+
+  def import
+    Rider.import(params[:file])
+    redirect_to root_url, notice: "Riders imported"
   end
 
   def race_start_time
@@ -36,7 +41,8 @@ class RidersController < ApplicationController
   end
 
   def leader_board
-    @riders = Rider.all
+    @riders = Rider.all(:order => 'finish_time ASC')
+    #@riders = Rider.where(:finish_time != blank?)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @riders }
