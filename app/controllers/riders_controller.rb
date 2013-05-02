@@ -31,7 +31,7 @@ class RidersController < ApplicationController
 
     respond_to do |format|
       if @rider.update_attributes(params[:rider])
-        format.html { redirect_to riders_url }
+        format.html { redirect_to riders_path }
         format.json { render json: @riders }
       else
         format.html { render action: "edit" }

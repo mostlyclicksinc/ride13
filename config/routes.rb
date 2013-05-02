@@ -5,7 +5,7 @@ Ride13::Application.routes.draw do
   end
 
   match 'riders/rider_finish' => 'riders#rider_finish'
-  match '/leader_board' => 'riders#leader_board'
+  #match '/leader_board' => 'riders#leader_board'
 
 
 
@@ -58,7 +58,7 @@ Ride13::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'riders#index'
+  root :to => 'riders#leader_board'
 
   # See how all your routes lay out with "rake routes"
 
