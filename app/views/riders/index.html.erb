@@ -1,4 +1,4 @@
-<h1>Listing riders</h1>
+<h1>Fasterly</h1>
 
 <h2>Import Riders</h2>
 <%= form_tag import_riders_path, multipart: true do %>
@@ -6,29 +6,27 @@
     <%= submit_tag "Import" %>
 <% end %>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Bib Number</th>
     <th>Name</th>
-    <th>Email</th>
+    
     <th>Official ST</th>
     <th>Start Time</th>
     <th>Finish Time</th>
     <th>Ride Time</th>
     <th></th>
     <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 <% @riders.each do |rider| %>
   <tr id="<%= rider.id %>">
     <td><%= rider.rider_number %></td>
     <td><%= rider.first_name %> <%= rider.last_name %></td>
     
-    <td><%= rider.email %></td>
+    
     <td><%= rider.official_start_time.strftime("%l:%M:%S") %></td>
-    <td><%= rider.start_time.strftime("%l:%M:%S") %></td>
+    <td><%= rider.start_time.strftime("%l:%M:%S %p") %></td>
     <% @finish_time_output = rider.finish_time.strftime("%l:%M:%S") unless rider.finish_time.nil? %>
     
     <td id="td_finish">
@@ -48,11 +46,12 @@
         <%#= ChronicDuration.output((rider.finish_time - @st).to_i, :format => :chrono) unless rider.finish_time.nil? %>
     </td>
 
-    <td><%= button_to 'Finish', :action => "rider_finish", :id => rider.id, :class => "finish_btn" %></td>
-
-    <td><%= link_to 'Show', rider %></td>
-    <td><%= link_to 'Edit', edit_rider_path(rider) %></td>
-    <td><%= link_to 'Destroy', rider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= button_to rider.rider_number, :action => "rider_finish", :id => rider.id, :class => "span1 btn btn-danger btn-large" %></td>
+<!--
+    <td><%#= link_to 'Show', rider %></td>
+    <td><%#= link_to 'Edit', edit_rider_path(rider) %></td>
+    <td><%#= link_to 'Destroy', rider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
   </tr>
 <% end %>
 </table>

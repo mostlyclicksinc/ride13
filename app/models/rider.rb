@@ -49,7 +49,7 @@ class Rider < ActiveRecord::Base
   private
   
     def set_start_time
-      st = Time.new(2013,5,2,12,30,0, "-05:00")
+      st = Time.new(2013,5,3,17,30,0, "-05:00")
       self.start_time = st + (Rider.count * 30).seconds
     end
 

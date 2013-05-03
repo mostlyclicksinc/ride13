@@ -1,11 +1,12 @@
 class RidersController < ApplicationController
+  http_basic_authenticate_with :name => "omnium", :password => "ralphheath", :except => :leader_board
   # GET /riders
   # GET /riders.json
 
   #before_filter :race_start_time
 
   def index
-    @riders = Rider.all(:order => 'start_time ASC')
+    @riders = Rider.all(:order => 'id ASC')
     @rider_counter
     #@race_start_time = Time.new(2013,5,3,17,30,0,"+06:00") #Set for race day
     
@@ -41,7 +42,7 @@ class RidersController < ApplicationController
   end
 
   def leader_board
-    @riders = Rider.all(:order => 'finish_time ASC')
+    @riders = Rider.all(:order => 'id ASC')
     #@riders = Rider.where(:finish_time != blank?)
     respond_to do |format|
       format.html # index.html.erb
