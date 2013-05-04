@@ -5,15 +5,15 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <link href='http://fonts.googleapis.com/css?family=Sonsie+One' rel='stylesheet' type='text/css'>
-  <script src="http://js.pusher.com/2.0/pusher.min.js" type="text/javascript"></script>
+  <!-- script src="http://js.pusher.com/2.0/pusher.min.js" type="text/javascript"></script -->
   <script>
     var pusher_key = "<%= Pusher.key %>";
     var pusher_channel = "ride13-<%= Rails.env %>";
   </script>
   <%= csrf_meta_tags %>
-  <% if params[:action] != 'index' %>
-  	<meta http-equiv="refresh" content="35" />
-  <% end %>
+  <%# if params[:action] != 'index' %>
+  	<!-- meta http-equiv="refresh" content="35" /-->
+  <%# end %>
 
   <style>
   h1 {font-family: 'Sonsie One', cursive; color:#d4181f;}
